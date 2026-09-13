@@ -89,7 +89,7 @@ class ToastNotifier(object):
         if icon_path is not None:
             icon_path = path.realpath(icon_path)
         else:
-            icon_path =  files("win10toast").joinpath("data/python.ico")
+            icon_path =  str(files("win10toast").joinpath("data/python.ico"))
         icon_flags = LR_LOADFROMFILE | LR_DEFAULTSIZE
         try:
             hicon = LoadImage(self.hinst, icon_path,
