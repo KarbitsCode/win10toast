@@ -2,7 +2,6 @@
 from operator import attrgetter
 from os import path
 
-from pip.req import parse_requirements
 from setuptools import setup
 
 def read(fname):
@@ -13,10 +12,12 @@ def from_here(relative_path):
     return path.join(path.dirname(__file__), relative_path)
 
 
-requirements_txt = list(map(str, map(
-    attrgetter("req"),
-    parse_requirements(from_here("requirements.txt"), session="")
-)))
+with open(from_here("requirements.txt")) as f:
+    requirements_txt = [
+        line.strip()
+        for line in f
+        if line.strip() and not line.startswith("#")
+    ]
 
 setup(
     name="win10toast",
